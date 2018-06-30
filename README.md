@@ -1,7 +1,10 @@
 # sandboxed-tor-browser
 Original developer: Yawning Angel (yawning at schwanenlied dot me)
 
-###About this repository: I'm not an expert, but I will try to maintain a usable Sandboxed Tor Browser. I think even a bad sandbox is better than no sandbox at all. Any help is welcomed and wanted. Contact: juanjo at avanix dot es
+About this repository: I'm not an expert, but I will try to maintain a usable Sandboxed Tor Browser. I think even a bad sandbox is better than no sandbox at all. Any help is welcomed and wanted. Contact: juanjo at avanix dot es
+
+This project aims to be compatible with new Tor Browser 8.0 alpha 9 with Firefox 60 ESR.
+This is already working in the latest version 0.0.18.
 
 Tor Browser sandboxed somewhat correctly using bubblewrap.  Obviously only
 works on Linux, and will NEVER support anything else since sandboxing is OS
