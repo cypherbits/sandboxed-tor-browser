@@ -1,12 +1,7 @@
 # sandboxed-tor-browser
-### Yawning Angel (yawning at schwanenlied dot me)
+Original developer: Yawning Angel (yawning at schwanenlied dot me)
 
-##### WARNING: This project is unmaintained.  Do not use it.
-##### WARNING: Active development is on indefinite hiatus.
-
-> I would build a great sandbox.  And nobody builds sandboxes better than me,
-> believe me.  I will build a great, great sandbox on our application border.
-> And I will have Tor Browser pay for that sandbox.
+###About this repository: I'm not an expert, but I will try to maintain a usable Sandboxed Tor Browser. I think even a bad sandbox is better than no sandbox at all. Any help is welcomed and wanted. Contact: juanjo at avanix dot es
 
 Tor Browser sandboxed somewhat correctly using bubblewrap.  Obviously only
 works on Linux, and will NEVER support anything else since sandboxing is OS
