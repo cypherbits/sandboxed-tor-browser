@@ -1,0 +1,2 @@
+UseBridges 1
+ClientTransportPlugin obfs2,obfs3,obfs4,scramblesuit exec /home/amnesia/tor/bin/PluggableTransports/obfs4proxy

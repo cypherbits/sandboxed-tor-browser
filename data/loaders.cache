@@ -1,0 +1,13 @@
+# GdkPixbuf Image Loader Modules file
+# Automatically generated file, do not edit
+# Created by gdk-pixbuf-query-loaders from gdk-pixbuf-2.31.1
+#
+# LoaderDir = /usr/lib/gdk-pixbuf-2.0/2.10.0/loaders
+#
+"/usr/lib/gdk-pixbuf-2.0/2.10.0/loaders/libpixbufloader-png.so"
+"png" 5 "gdk-pixbuf" "The PNG image format" "LGPL"
+"image/png" ""
+"png" ""
+"\211PNG\r\n\032\n" "" 100
+
+

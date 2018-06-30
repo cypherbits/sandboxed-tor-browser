@@ -1,0 +1,58 @@
+# tor binary (x86_64) obfs4proxy seccomp whitelist.
+#
+# These are the rules that should apply to tor and obfs4proxy.  Eventually,
+# obfs4proxy should live in it's own container so this file should go away.
+
+#
+# Extra constant definitions needed for filtering.
+#
+
+FUTEX_WAIT=0
+FUTEX_WAKE=1
+FUTEX_FD=2
+FUTEX_REQUEUE=3
+FUTEX_CMP_REQUEUE=4
+FUTEX_WAKE_OP=5
+#FUTEX_LOCK_PI=6
+#FUTEX_UNLOCK_PI=7
+FUTEX_WAIT_BITSET=9
+FUTEX_PRIVATE_FLAG=128
+FUTEX_CLOCK_REALTIME=256
+
+FUTEX_WAIT_PRIVATE=FUTEX_WAIT | FUTEX_PRIVATE_FLAG
+FUTEX_WAKE_PRIVATE=FUTEX_WAKE | FUTEX_PRIVATE_FLAG
+FUTEX_CMP_REQUEUE_PRIVATE=FUTEX_CMP_REQUEUE | FUTEX_PRIVATE_FLAG
+FUTEX_WAKE_OP_PRIVATE=FUTEX_WAKE_OP | FUTEX_PRIVATE_FLAG
+#FUTEX_LOCK_PI_PRIVATE=FUTEX_LOCK_PI | FUTEX_PRIVATE_FLAG
+#FUTEX_UNLOCK_PI_PRIVATE=FUTEX_UNLOCK_PI | FUTEX_PRIVATE_FLAG
+FUTEX_WAIT_BITSET_PRIVATE=FUTEX_WAIT_BITSET | FUTEX_PRIVATE_FLAG
+
+
+#
+# obfs4proxy specific system calls allowed unconditionally without argument
+# filtering.
+#
+
+mincore: 1
+dup2: 1
+select: 1
+mkdirat: 1
+fsync: 1
+getpeername: 1
+getppid: 1
+
+#
+# obfs4proxy specific system calls allowed with filtering.
+#
+
+epoll_create1: arg0 == EPOLL_CLOEXEC
+
+#
+# System calls allowed with filtering that obfs4proxy/tor want to allow
+# different things for.
+#
+
+futex: arg1 == FUTEX_WAIT_BITSET_PRIVATE|FUTEX_CLOCK_REALTIME || arg1 == FUTEX_WAKE_PRIVATE || arg1 == FUTEX_WAIT_PRIVATE || arg1 == FUTEX_WAKE || arg1 == FUTEX_WAIT
+mprotect: arg2 == PROT_READ || arg2 == PROT_NONE || arg2 == PROT_READ|PROT_WRITE
+mmap: (arg2 == PROT_READ && arg3 == MAP_PRIVATE) || (arg2 == PROT_NONE && arg3 == MAP_PRIVATE|MAP_ANONYMOUS|MAP_NORESERVE) || (arg2 == PROT_READ|PROT_WRITE && arg3 == MAP_PRIVATE|MAP_ANONYMOUS) || (arg2 == PROT_READ|PROT_WRITE && arg3 == MAP_PRIVATE|MAP_ANONYMOUS|MAP_STACK) || (arg2 == PROT_READ|PROT_WRITE && arg3 == MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE) || (arg2 == PROT_READ|PROT_WRITE && arg3 == MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS) || (arg2 == PROT_READ|PROT_EXEC && arg3 == MAP_PRIVATE|MAP_DENYWRITE) || (arg2 == PROT_READ|PROT_WRITE && arg3 == MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS|MAP_NORESERVE) || (arg2 == PROT_NONE && arg3 == MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS|MAP_NORESERVE) || (arg2 == PROT_NONE && arg3 == MAP_PRIVATE|MAP_ANONYMOUS) || (arg2 == PROT_NONE && arg3 == MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS) || (arg2 == PROT_NONE && arg3 == MAP_PRIVATE|MAP_ANONYMOUS|MAP_STACK)
+setsockopt: (arg1 == SOL_SOCKET && (arg2 == SO_REUSEADDR || arg2 == SO_SNDBUF || arg2 == SO_RCVBUF || arg2 == SO_BROADCAST)) || (arg1 == SOL_TCP && arg2 == TCP_NODELAY) || (arg1 == SOL_IPV6 && arg2 == IPV6_V6ONLY)

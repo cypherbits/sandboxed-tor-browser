@@ -1,0 +1,80 @@
+{
+	"version": 0,
+	"dependencies": [
+		{
+			"importpath": "git.schwanenlied.me/yawning/bulb.git",
+			"repository": "https://git.schwanenlied.me/yawning/bulb.git",
+			"revision": "309735b30184b1eab438b0389eb776206e880eae",
+			"branch": "master"
+		},
+		{
+			"importpath": "git.schwanenlied.me/yawning/grab.git",
+			"repository": "https://git.schwanenlied.me/yawning/grab.git",
+			"revision": "e086be1f7d448807971a09651a40d64499613828",
+			"branch": "master"
+		},
+		{
+			"importpath": "git.schwanenlied.me/yawning/hpkp.git",
+			"repository": "https://git.schwanenlied.me/yawning/hpkp.git",
+			"revision": "30623e5213bbab82a5ac7aae317c7e91e8ddf998",
+			"branch": "master"
+		},
+		{
+			"importpath": "github.com/cep21/xdgbasedir",
+			"repository": "https://github.com/cep21/xdgbasedir",
+			"revision": "cd6a71c07e4e43eec22cbf1606ff14c327207445",
+			"branch": "master"
+		},
+		{
+			"importpath": "github.com/gotk3/gotk3",
+			"repository": "https://github.com/gotk3/gotk3",
+			"revision": "e1c63f37d60933d70a453726eaf931bdd125c55b",
+			"branch": "master"
+		},
+		{
+			"importpath": "github.com/jteeuwen/go-bindata",
+			"repository": "https://github.com/jteeuwen/go-bindata",
+			"revision": "a0ff2567cfb70903282db057e799fd826784d41d",
+			"branch": "master"
+		},
+		{
+			"importpath": "github.com/twtiger/gosecco",
+			"repository": "https://github.com/twtiger/gosecco",
+			"revision": "81110d334ed7a530d99ad620375855246f21d524",
+			"branch": "master"
+		},
+		{
+			"importpath": "github.com/ulikunitz/xz",
+			"repository": "https://github.com/ulikunitz/xz",
+			"revision": "3e84f9193f6ec5cd5998463d64c88f798356b0c9",
+			"branch": "master"
+		},
+		{
+			"importpath": "golang.org/x/crypto",
+			"repository": "https://go.googlesource.com/crypto",
+			"revision": "351dc6a5bf92a5f2ae22fadeee08eb6a45aa2d93",
+			"branch": "master"
+		},
+		{
+			"importpath": "golang.org/x/net/context",
+			"repository": "https://go.googlesource.com/net",
+			"revision": "3a1f9ef983bc408afd0a9e63fd9c962ae853e543",
+			"branch": "master",
+			"path": "/context"
+		},
+		{
+			"importpath": "golang.org/x/net/proxy",
+			"repository": "https://go.googlesource.com/net",
+			"revision": "7394c112eae4dba7e96bfcfe738e6373d61772b4",
+			"branch": "master",
+			"path": "/proxy"
+		},
+		{
+			"importpath": "golang.org/x/sys/unix",
+			"repository": "https://go.googlesource.com/sys",
+			"revision": "d75a52659825e75fff6158388dddc6a5b04f9ba5",
+			"branch": "master",
+			"path": "/unix"
+		}
+	]
+}

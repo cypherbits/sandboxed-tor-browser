@@ -1,0 +1,123 @@
+# tor binary (x86_64) common seccomp whitelist.
+#
+# This is based off of tor's src/common/sandbox.c and is the whitelist for
+# calls that aren't affected by the presence of obfs4proxy.  gosecco's compiler
+# doesn't allow multiple rules for the same system call that aren't identical.
+
+#
+# Extra constant definitions needed for filtering.
+#
+
+MADV_FREE=8
+MREMAP_MAYMOVE=1
+
+SIG_BLOCK=1
+SIG_SETMASK=2
+
+PF_INET=AF_INET
+PF_INET6=AF_INET6
+PF_LOCAL=AF_LOCAL
+PF_UNIX=AF_UNIX
+POLLIN=1
+
+MASKED_CLOEXEC_NONBLOCK = 0xFFF7F7FF
+
+#
+# System calls allowed unconditionally without argument filtering.
+#
+
+access: 1
+brk: 1
+clock_gettime: 1
+close: 1
+clone: 1
+epoll_create: 1
+epoll_wait: 1
+epoll_pwait: 1
+eventfd2: 1
+pipe2: 1
+pipe: 1
+fstat: 1
+getdents: 1
+getdents64: 1
+getegid: 1
+geteuid: 1
+getgid: 1
+getrlimit: 1
+gettimeofday: 1
+gettid: 1
+getuid: 1
+lseek: 1
+mkdir: 1
+munmap: 1
+prlimit64: 1
+read: 1
+rt_sigreturn: 1
+sched_getaffinity: 1
+sched_yield: 1
+sendmsg: 1
+set_robust_list: 1
+setrlimit: 1
+sigaltstack: 1
+stat: 1
+uname: 1
+wait4: 1
+write: 1
+writev: 1
+exit_group: 1
+exit: 1
+getrandom: 1
+sysinfo: 1
+bind: 1
+listen: 1
+connect: 1
+getsockname: 1
+recvmsg: 1
+recvfrom: 1
+sendto: 1
+unlink: 1
+
+# tor's sandbox filters these, but we can't because we are not in the tor
+# daemon's process space.
+chown: 1
+chmod: 1
+open: 1
+openat: 1
+rename: 1
+
+# Calls made prior to tor's UseSeccomp being enabled.
+arch_prctl: 1
+chdir: 1
+execve: 1
+getpid: 1
+kill: 1
+restart_syscall: 1
+set_tid_address: 1
+unshare: 1
+rt_sigaction: 1
+setsid: 1
+
+#
+# System calls allowed with filtering.
+#
+# Note:
+#  * socket:
+#     * tor explicitly allows PF_FILE separately from PF_UNIX which is
+#       pointless/nonsensical under Linux.
+#     * Tor allows socket(PF_NETLINK, SOCK_RAW, 0) but will accept no.
+#
+
+time: arg0 == 0
+madvise: arg2 == MADV_FREE
+umask: arg0 == 022
+rt_sigprocmask: arg0 == SIG_BLOCK || arg0 == SIG_SETMASK
+epoll_ctl: arg1 == EPOLL_CTL_ADD || arg1 == EPOLL_CTL_MOD || arg1 == EPOLL_CTL_DEL
+prctl: (arg0 == PR_SET_DUMPABLE && arg1 == 0) || arg0 == PR_SET_PDEATHSIG
+flock: arg1 == (LOCK_EX | LOCK_NB) || arg1 == LOCK_UN
+mremap: arg3 == MREMAP_MAYMOVE
+accept4: argL3 & MASKED_CLOEXEC_NONBLOCK == 0 && argH3 == 0
+poll: arg1 == POLLIN && arg2 == 10
+socket: argH1 == 0 && (arg0 == PF_INET && argL1 & MASKED_CLOEXEC_NONBLOCK == SOCK_STREAM && arg2 == IPPROTO_TCP) || (arg0 == PF_INET && argL1 & MASKED_CLOEXEC_NONBLOCK == SOCK_STREAM && arg2 == IPPROTO_IP) || (arg0 == PF_INET && argL1 & MASKED_CLOEXEC_NONBLOCK == SOCK_DGRAM && arg2 == IPPROTO_IP) || (arg0 == PF_INET && argL1 & MASKED_CLOEXEC_NONBLOCK == SOCK_DGRAM && arg2 == IPPROTO_UDP) || (arg0 == PF_INET6 && argL1 & MASKED_CLOEXEC_NONBLOCK == SOCK_STREAM && arg2 == IPPROTO_TCP) || (arg0 == PF_INET6 && argL1 & MASKED_CLOEXEC_NONBLOCK == SOCK_STREAM && arg2 == IPPROTO_IP) || (arg0 == PF_INET6 && argL1 & MASKED_CLOEXEC_NONBLOCK == SOCK_DGRAM && arg2 == IPPROTO_IP) || (arg0 == PF_INET6 && argL1 & MASKED_CLOEXEC_NONBLOCK == SOCK_DGRAM && arg2 == IPPROTO_UDP) || (arg0 == PF_UNIX && argL1 & MASKED_CLOEXEC_NONBLOCK == SOCK_STREAM && arg2 == 0) || (arg0 == PF_UNIX && argL1 & MASKED_CLOEXEC_NONBLOCK == SOCK_DGRAM && arg2 == 0)
+getsockopt: arg1 == SOL_SOCKET && arg2 == SO_ERROR
+socketpair: arg0 == PF_LOCAL && (arg1 == SOCK_STREAM || arg1 == SOCK_STREAM | SOCK_CLOEXEC)
+fcntl: arg1 == F_GETFL || (arg1 == F_SETFL && (arg2 == O_RDWR|O_NONBLOCK || arg2 == O_RDONLY |O_NONBLOCK)) || arg1 == F_GETFD || (arg1 == F_SETFD && arg2 == FD_CLOEXEC)

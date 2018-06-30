@@ -1,0 +1,7 @@
+bin/
+pkg/
+data/revision
+data/tbb_stub.so
+src/cmd/sandboxed-tor-browser/internal/data/bindata.go
+*.swp
+*~

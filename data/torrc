@@ -1,0 +1,17 @@
+# sandboxed-tor-browser torrc file.
+#
+# Warning: This file is specifically crafted for the sandboxed-tor-browser's
+# sandbox.  Editing it is not recommended, and will lead to problems.
+#
+
+SocksPort unix:/home/amnesia/tor/data/socks IPv6Traffic PreferIPv6 KeepAliveIsolateSOCKSAuth
+ControlPort unix:/home/amnesia/tor/data/control
+ControlPortWriteToFile /home/amnesia/tor/data/control_port
+
+DataDirectory /home/amnesia/tor/data
+GeoIPFile /home/amnesia/tor/etc/geoip
+GeoIPv6File /home/amnesia/tor/etc/geoip6
+
+HiddenServiceStatistics 0
+__OwningControllerProcess 1
+DisableNetwork 1

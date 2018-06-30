@@ -1,0 +1,18 @@
+{
+  "downloadsURLs": {
+    "release": "https://aus1.torproject.org/torbrowser/update_3/release/downloads.json",
+    "alpha": "https://aus1.torproject.org/torbrowser/update_3/alpha/downloads.json"
+  },
+  "downloadsOnions": {
+    "release": "http://x3nelbld33llasqv.onion/torbrowser/update_3/release/downloads.json",
+    "alpha": "http://x3nelbld33llasqv.onion/torbrowser/update_3/alpha/downloads.json"
+  },
+  "updateURLs": {
+    "release": "https://aus1.torproject.org/torbrowser/update_3/release",
+    "alpha": "https://aus1.torproject.org/torbrowser/update_3/alpha"
+  },
+  "updateOnions": {
+    "release": "http://x3nelbld33llasqv.onion/torbrowser/update_3/release",
+    "alpha": "http://x3nelbld33llasqv.onion/torbrowser/update_3/alpha"
+  }
+}

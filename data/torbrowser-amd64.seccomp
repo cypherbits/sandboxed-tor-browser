@@ -1,0 +1,209 @@
+# Tor Browser (x86_64) seccomp whitelist.
+#
+# This is based off of:
+# https://github.com/subgraph/subgraph-oz-profiles/blob/master/torbrowser-launcher-whitelist.seccomp
+# https://github.com/mozilla/gecko-dev/blob/master/security/sandbox/linux/SandboxFilter.cpp
+
+#
+# Extra constant definitions needed for filtering.
+#
+
+FIONREAD = 0x541b
+TCGETS = 0x5401
+TIOCGPGRP = 0x540f
+
+MADV_NORMAL=0
+MADV_DONTNEED=4
+MADV_FREE=8
+
+FUTEX_WAIT=0
+FUTEX_WAKE=1
+FUTEX_FD=2
+FUTEX_REQUEUE=3
+FUTEX_CMP_REQUEUE=4
+FUTEX_WAKE_OP=5
+#FUTEX_LOCK_PI=6
+#FUTEX_UNLOCK_PI=7
+FUTEX_WAIT_BITSET=9
+FUTEX_PRIVATE_FLAG=128
+FUTEX_CLOCK_REALTIME=256
+
+FUTEX_WAIT_PRIVATE=FUTEX_WAIT | FUTEX_PRIVATE_FLAG
+FUTEX_WAKE_PRIVATE=FUTEX_WAKE | FUTEX_PRIVATE_FLAG
+FUTEX_CMP_REQUEUE_PRIVATE=FUTEX_CMP_REQUEUE | FUTEX_PRIVATE_FLAG
+FUTEX_WAKE_OP_PRIVATE=FUTEX_WAKE_OP | FUTEX_PRIVATE_FLAG
+#FUTEX_LOCK_PI_PRIVATE=FUTEX_LOCK_PI | FUTEX_PRIVATE_FLAG
+#FUTEX_UNLOCK_PI_PRIVATE=FUTEX_UNLOCK_PI | FUTEX_PRIVATE_FLAG
+FUTEX_WAIT_BITSET_PRIVATE=FUTEX_WAIT_BITSET | FUTEX_PRIVATE_FLAG
+
+PR_SET_NO_NEW_PRIVS=38
+
+#
+# System calls allowed unconditionally without argument filtering.
+#
+
+clock_gettime: 1
+clock_getres: 1
+gettimeofday: 1
+nanosleep: 1
+sched_yield: 1
+
+open: 1
+openat: 1
+pread64: 1
+read: 1
+recvfrom: 1
+pwrite64: 1
+sendto: 1
+write: 1
+writev: 1
+close: 1
+
+access: 1
+creat: 1
+chmod: 1
+chdir: 1
+dup2: 1
+dup: 1
+fadvise64: 1
+fallocate: 1
+fcntl: 1
+fchmod: 1
+fchown: 1
+fchdir: 1
+fdatasync: 1
+fstat: 1
+fstatfs: 1
+ftruncate: 1
+fsync: 1
+getcwd: 1
+getdents: 1
+getdents64: 1
+link: 1
+lseek: 1
+lstat: 1
+mkdir: 1
+name_to_handle_at: 1
+newfstatat: 1
+pipe: 1
+pipe2: 1
+readahead: 1
+readlink: 1
+readlinkat: 1
+rename: 1
+rmdir: 1
+stat: 1
+splice: 1
+statfs: 1
+symlink: 1
+unlink: 1
+utime: 1
+utimes: 1
+
+accept4: 1
+bind: 1
+connect: 1
+epoll_create: 1
+epoll_create1: 1
+epoll_ctl: 1
+epoll_wait: 1
+eventfd2: 1
+getsockname: 1
+getsockopt: 1
+getpeername: 1
+listen: 1
+poll: 1
+ppoll: 1
+recvmsg: 1
+socketpair: 1
+select: 1
+sendmsg: 1
+setsockopt: 1
+shutdown: 1
+
+inotify_add_watch: 1
+inotify_init1: 1
+inotify_rm_watch: 1
+
+brk: 1
+mincore: 1
+mmap: 1
+mprotect: 1
+mremap: 1
+munmap: 1
+
+shmdt: 1
+shmat: 1
+shmctl: 1
+shmget: 1
+
+alarm: 1
+execve: 1
+getrandom: 1
+getrlimit: 1
+getrusage: 1
+getpgrp: 1
+getppid: 1
+getpid: 1
+getpriority: 1
+getresgid: 1
+getresuid: 1
+gettid: 1
+getuid: 1
+geteuid: 1
+getgid: 1
+getegid: 1
+prlimit64: 1
+rt_sigaction: 1
+rt_sigprocmask: 1
+rt_sigreturn: 1
+rt_tgsigqueueinfo: 1
+sigaltstack: 1
+
+arch_prctl: 1
+capset: 1
+capget: 1
+clone: 1
+exit: 1
+exit_group: 1
+kill: 1
+restart_syscall: 1
+seccomp: 1
+sched_getaffinity: 1
+sched_setscheduler: 1
+setpriority: 1
+set_robust_list: 1
+setsid: 1
+set_tid_address: 1
+setresuid: 1
+setresgid: 1
+sysinfo: 1
+tgkill: 1
+umask: 1
+uname: 1
+unshare: 1
+wait4: 1
+
+#
+# System calls allowed with filtering.
+#
+# Note: Because we patch PulseAudio from tbb_stub.so, we can omit all PI futex
+# calls.
+#
+
+futex: arg1 == FUTEX_CMP_REQUEUE_PRIVATE || arg1 == FUTEX_WAIT || arg1 == FUTEX_WAIT_BITSET_PRIVATE|FUTEX_CLOCK_REALTIME || arg1 == FUTEX_WAIT_PRIVATE || arg1 == FUTEX_WAKE || arg1 == FUTEX_WAKE_OP_PRIVATE || arg1 == FUTEX_WAKE_PRIVATE || arg1 == FUTEX_WAIT_BITSET_PRIVATE
+madvise: arg2 == MADV_NORMAL || arg2 == MADV_DONTNEED || arg2 == MADV_FREE
+ioctl: arg1 == FIONREAD || arg1 == TCGETS || arg1 == TIOCGPGRP
+prctl: arg0 == PR_SET_NAME || arg0 == PR_GET_NAME || arg0 == PR_GET_TIMERSLACK || arg0 == PR_SET_SECCOMP || arg0 == PR_SET_NO_NEW_PRIVS
+socket: arg0 == AF_UNIX
+
+# Calls that other people think we should have but we deny:
+#
+# Firefox:
+#  * quotactl - gracefully deals with rejection.
+#
+# Subgraph (all probably python):
+#  * vfork
+#  * memfd_create
+#  * personality
+#  * mlock

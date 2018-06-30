@@ -1,0 +1,139 @@
+
+TODO:
+-default UI layout change it to be more user friendly
+-view if we can disable more system calls for esr60 in seccomp: https://www.morbo.org/2018/05/linux-sandboxing-improvements-in_10.html
+-re enable PGP check with the new key esr60
+-re disable /proc/ access for esr60 or filter
+-GTK3 schemas and icons better finegrained/filtering
+-Codecs, video, audio etc... youtube video player.
+-GTK3 file chooser etc shows too much things
+
+Changes in version 0.0.18 - 2018-07-01:
+ * Make it work with the new Tor Browser 8.0a9 with Firefox 60 ESR. To allow this we detect you use this version and:
+ -Enable mounting /proc (for this version only).
+ -Disable PGP verification (for all versions) for installations because this new alpha is signed with a new public key, this will be fixed soon.
+ (Downloads are HTTPS and HPKP so this is probably not a thread)
+ -Firefox 60 needs glib schemas, we mount them and some icons too... (for this version only)
+ (I will filter /proc , schemas, and review seccomp for ESR60 to keep it safer in future versions)
+
+Changes in version 0.0.17 - UNRELEASED:
+ * Bug 25154: Fix a content process crash on JS heavy pages.
+ * dynlib: Search the system library path(s) as the last resort.
+
+Changes in version 0.0.16 - 2017-11-24:
+ * Bug 24171: Create the `Caches` directory properly.
+
+Changes in version 0.0.15 - 2017-10-30:
+ * Bug 23915: 7.0.7 and later fails to work without `SECCOMP_FILTER_FLAG_TSYNC`.
+ * Bug 23166: Add Felix's obfs4 bridges to the built-in bridges.
+ * Bug 23943: obfs4proxy crashes on certain systems.
+ * Disable the 2017 donation campaign banner.
+
+Changes in version 0.0.14 - 2017-09-29:
+ * Bug 8706: Fully disable the .recently-used.xbel.
+ * Bug 22814: Revert the upstream fix by default.
+ * Bug 23692: Add PR_SET_NO_NEW_PRIVS as an allowed prctl() operation.
+
+Changes in version 0.0.13 - 2017-09-13:
+ * Bug 13170: Disable the rest of the Firefox experiments botnet prefs.
+ * Bug 23449: Allow `epool_pwait` in the tor seccomp rules.
+ * Use lockPref for the IDN override done as part of #22984.
+ * Unset the addon autoupdater URL prefs.
+ * Disable the "Open with" dialog, which will never work.
+ * Use the GCC constructor attribute for stub initialization.
+
+Changes in version 0.0.12 - 2017-08-01:
+ * Bug 22969: Disable the addon blocklist.
+ * Bug 22984: Force IDNs to be displayed as punycode to thwart homograph
+              attacks.
+ * Bug 22967: Force disable crashdump reporting.
+ * Bug 23058: Apply the SelfRando workaround to 7.5a3 as well.
+ * Default disable `dom.securecontext.whitelist_onions`.
+
+Changes in version 0.0.11 - 2017-07-18:
+ * Bug 22910: Deprecate the volatile extension dir option.
+ * Bug 22932: Add experimental Amnesiac Profile Directory support.
+
+Changes in version 0.0.10 - 2017-07-12:
+ * Bug 22829: Remove default obfs4 bridge riemann.
+ * Bug 22853: Something in SelfRando is totally brain damaged.
+ * Bug 22899: `about:addons`'s "Get Addons" pane is unsafe and should be
+              treated as such.
+ * Bug 22901: Clarify/expand on the warnings for all the config settings.
+
+Changes in version 0.0.9 - 2017-07-03:
+ * Bug 22712: Suppress ATK Bridge initialization which will never work.
+ * Bug 20773: Stop mounting /proc in the Tor Browser container.
+ * Fix the build being broken on Debian Jessie due to #22648.
+ * Remove the undocumented command line options that enable unsafe behavior.
+
+Changes in version 0.0.8 - 2017-06-19:
+ * Bug 20776: Remove the X11 `MIT-SHM` workaround from the stub.
+ * Bug 22470: Resync the bridges.
+ * Bug 22607: Make it clear that basically 0 active development is happening.
+ * Bug 22648: Prevent the "easy" to fix X11 related sandbox escapes.
+ * Bug 22650: Make it clear that Pulse Audio is potentially dangerous
+   to enable.
+
+Changes in version 0.0.7 - 2017-05-22:
+ * Bug 21977: Fetch install/update metadata files from a different location.
+ * Bug 22038: Stub out `pa_start_child_for_read`.
+
+Changes in version 0.0.6 - 2017-04-19:
+ * Add back the old release MAR signing key.
+
+Changes in version 0.0.5 - 2017-04-13:
+ * Bug 21764: Use bubblewrap's `--die-with-parent` when supported.
+ * Fix e10s Web Content crash on systems with grsec kernels.
+ * Add `prlimit64` to the firefox system call whitelist.
+
+Changes in version 0.0.4 - 2017-04-12:
+ * Bug 21928: Force a reinstall if an existing hardened bundle is present.
+ * Bug 21929: Remove hardened/ASAN related code.
+ * Bug 21927: Remove the ability to install/update the hardened bundle.
+ * Bug 21244: Update the MAR signing key for 7.0.
+ * Bug 21536: Remove asn's scramblesuit bridge from Tor Browser.
+ * Fix compilation with Go 1.8.
+ * Use Config.Clone() to clone TLS configs when available.
+
+Changes in version 0.0.3 - 2017-01-18:
+ * Bug 21057: Change the metadata URL(s) for the stable bundle.
+ * Bug 21184: Do a better job of killing/cleaning up bwrap children.
+ * Bug 21093: Go back to using gosecco for seccomp rule compilation.
+ * Bug 20940: Deprecate x86 support.
+ * Bug 20778: Check for updates in the background.
+ * Bug 20851: If the incremental update fails, fall back to the complete
+   update.
+ * Bug 21055: Fall back gracefully if the Adwaita theme is not present.
+ * Bug 20791: Fetch install/update metadata using onions.
+ * Bug 20979: runtime/cgo: pthread_create failed: Resource temporarily
+   unavailable.
+ * Bug 20993: Handle the lock file better.
+ * Bug 20970: Firefox crashes if the security slider is left at the default
+   on certain pages.
+ * Bug 20973: Silence Gdk warnings on systems with integrated png loader.
+ * Bug 20806: Try even harder to exclude gstreamer.
+ * Enforce the patch size against that listed in the update XML metadata.
+ * Minor tweaks to the "something in progress" dialog box.
+ * Disable the firefox safe mode prompt, because it is nonsensical when
+   applied to Tor Browser.
+ * Add a `-h` command line flag that prints usage.
+ * Remove the unused `pulseAudioBox` identifier.
+ * Store the version of the sandbox in the config file, and re-Sync() the
+   config, and reinstall the `mozilla.cfg` when things change.
+ * Include the git revision as a static asset, and display it as part of
+   the `--version` output.
+ * Fix a nil pointer deref on SIGINT received durring bootstrap.
+ * Don't remove the PaX overrides ever, because until the JIT gets rewritten
+   Firefox won't play nice with MPROTECT.
+ * setsid() related fixes and changes as bubblewrap behavior has changed.
+
+Changes in version 0.0.2 - 2016-12-10:
+ * Bug #20780: Shuffle and persist the ordering of internal bridges.
+ * Bug #20806: Add an option to disable including `libavcodec.so` in the
+   firefox container.
+ * Bug #20899: Incorrect x86_64 ld.so flag check in dynlib.
+ * Allow MADV_FREE in the firefox seccomp profile.
+
+Changes in version 0.0.1 - 2016-12-09:
+ * Initial release.
