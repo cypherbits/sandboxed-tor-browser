@@ -263,7 +263,7 @@ func Init() (sbui.UI, error) {
 	// convey fatal errors.
 	gtk3.Init(nil)
 
-	if ui.logoPixbuf, err = ui.pixbufFromAsset("ui/tbb-logo.png"); err != nil {
+	if ui.logoPixbuf, err = ui.pixbufFromAsset("ui/tbb-logo.svg"); err != nil {
 		return nil, err
 	}
 	if ui.iconPixbuf, err = ui.pixbufFromAsset("ui/default48.png"); err != nil {
