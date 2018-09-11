@@ -69,8 +69,8 @@ func RunTorBrowser(cfg *config.Config, manif *config.Manifest, tor *tor.Tor) (pr
 	h.stderr = logger
 	h.seccompFn = installTorBrowserSeccompProfile
 	h.fakeDbus = true
-	if manif.BundleVersionAtLeast("8.0a9"){
-			h.mountProc = true //FF 60ESR needs this for now
+	if manif.BundleVersionAtLeast("8.0a9") {
+		h.mountProc = true //FF 60ESR needs this for now
 	}
 	h.fakeProc = false //FF 60ESR doesnt need this
 
@@ -135,13 +135,12 @@ func RunTorBrowser(cfg *config.Config, manif *config.Manifest, tor *tor.Tor) (pr
 	desktopDir := filepath.Join(browserHome, "Desktop")
 	extensionsDir := filepath.Join(profileDir, "extensions")
 
-prefFile := "preferences"
-prefFileOptional := false
-	if manif.Channel == "alpha" && manif.BundleVersionAtLeast("8.0a9") {
+	prefFile := "preferences"
+	prefFileOptional := false
+	if manif.BundleVersionAtLeast("8.0a9") {
 		//FF60
 		prefFile = "prefs.js"
 		prefFileOptional = true
-
 
 		//AVANIX added this, 60ESR needs this schemas...
 		//Enable Glib schemas to allow open, save etc...
@@ -153,8 +152,6 @@ prefFileOptional := false
 		//Allow this for some icons
 		h.roBind("/usr/share/icons/gnome", "/usr/share/icons/gnome", true)
 	}
-
-
 
 	// Filesystem stuff.
 	h.roBind(cfg.BundleInstallDir, filepath.Join(h.homeDir, "sandboxed-tor-browser", "tor-browser"), false)
@@ -247,6 +244,9 @@ prefFileOptional := false
 	// Tor Browser currently is incompatible with PaX MPROTECT, apply the
 	// override if needed.
 	realFirefoxPath := filepath.Join(realBrowserHome, "firefox")
+	if manif.BundleVersionAtLeast("8.0a10") {
+		realFirefoxPath = filepath.Join(realBrowserHome, "firefox.real")
+	}
 	needsPaXPaths := []string{
 		realFirefoxPath,
 		filepath.Join(realBrowserHome, "plugin-container"),
@@ -332,6 +332,9 @@ prefFileOptional := false
 	h.setenv("LD_LIBRARY_PATH", filepath.Join(browserHome, "TorBrowser", "Tor")+extraLdLibraryPath)
 
 	h.cmd = filepath.Join(browserHome, "firefox")
+	if manif.BundleVersionAtLeast("8.0a10") {
+		h.cmd = filepath.Join(browserHome, "firefox.real")
+	}
 	h.cmdArgs = []string{"--class", "Tor Browser", "-profile", profileDir}
 
 	// Do X11 last, because of the surrogate.
@@ -728,7 +731,6 @@ func (h *hugbox) appendRestrictedOpenGL() ([]string, string) {
 	return nil, ""
 }
 
-
 func (h *hugbox) appendGtk2Theme() bool {
 	const (
 		themeDir          = "/usr/share/themes/Adwaita/gtk-2.0"
@@ -851,6 +853,7 @@ func (h *hugbox) appendLibraries(cache *dynlib.Cache, binaries []string, extraLi
 	// a precise location on the filesystem.
 	ldSoPath, ldSoAlias, err := dynlib.FindLdSo(cache)
 	if err != nil {
+		Debugf("sandbox error dynlin.FindLdSo: %v", err)
 		return err
 	} else {
 		Debugf("sandbox: ld.so appears to be '%v' -> %v.", ldSoAlias, ldSoPath)
@@ -864,6 +867,7 @@ func (h *hugbox) appendLibraries(cache *dynlib.Cache, binaries []string, extraLi
 	fallbackLibSearchPath := strings.Join(distributionDependentLibSearchPath, fmt.Sprintf("%c", filepath.ListSeparator))
 	toBindMount, err := cache.ResolveLibraries(binaries, extraLibs, ldLibraryPath, fallbackLibSearchPath, filterFn)
 	if err != nil {
+		Debugf("sandbox error cache.ResolveLibraries: %v", err)
 		return err
 	}
 

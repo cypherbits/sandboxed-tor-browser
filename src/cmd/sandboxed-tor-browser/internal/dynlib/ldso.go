@@ -17,6 +17,7 @@
 package dynlib
 
 import (
+	. "cmd/sandboxed-tor-browser/internal/utils"
 	"debug/elf"
 	"errors"
 	"fmt"
@@ -30,6 +31,7 @@ var errUnsupported = errors.New("dynlib: unsupported os/architecture")
 func getLibraries(fn string) ([]string, error) {
 	f, err := elf.Open(fn)
 	if err != nil {
+		Debugf("dynlib ldso error elf.Open '%v': %v", fn, err)
 		return nil, err
 	}
 	defer f.Close()

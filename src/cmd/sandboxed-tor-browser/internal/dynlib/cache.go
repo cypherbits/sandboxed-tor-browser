@@ -101,12 +101,14 @@ func (c *Cache) ResolveLibraries(binaries []string, extraLibs []string, ldLibrar
 		for _, fn := range toCheck {
 			if filterFn != nil {
 				if err := filterFn(fn); err != nil {
+					Debugf("dynlib error filterFn: %v", err)
 					return nil, err
 				}
 			}
 
 			impLibs, err := getLibraries(fn)
 			if err != nil {
+				Debugf("dynlib error getLibraries: %v", err)
 				return nil, err
 			}
 			Debugf("dynlib: %v imports: %v", fn, impLibs)
@@ -297,6 +299,7 @@ func LoadCache() (*Cache, error) {
 	stringTable := b
 
 	// new_magic.
+	//glibc-ld.so.cache1.1
 	cacheMagicNew := []byte{
 		'g', 'l', 'i', 'b', 'c', '-', 'l', 'd', '.', 's', 'o', '.', 'c', 'a', 'c',
 		'h', 'e', '1', '.', '1',
