@@ -12,6 +12,9 @@ TODO:
 Changes in version 0.0.19 - 2018-07-X UNRELEASED:
 *New Tor Browser logo.
 
+Changes in version 0.0.18.1 - 2018-09-11:
+* FIX: Make Tor Browser 8 work again and add more debug messages.
+
 Changes in version 0.0.18 - 2018-07-01:
  * Make it work with the new Tor Browser 8.0a9 with Firefox 60 ESR. To allow this we detect you use this version and:
  -Enable mounting /proc (for this version only).
