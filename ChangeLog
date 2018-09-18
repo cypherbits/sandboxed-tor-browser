@@ -1,16 +1,5 @@
-
-TODO:
--new icons with the new tor UI designs.
--default UI layout change it to be more user friendly
--view if we can disable more system calls for esr60 in seccomp: https://www.morbo.org/2018/05/linux-sandboxing-improvements-in_10.html
--re enable PGP check with the new key esr60
--re disable /proc/ access for esr60 or filter -> https://trac.torproject.org/projects/tor/ticket/20283
--GTK3 schemas and icons better finegrained/filtering
--Codecs, video, audio etc... youtube video player.
--GTK3 file chooser etc shows too much things
-
-Changes in version 0.0.19 - 2018-07-X UNRELEASED:
-*New Tor Browser logo.
+Changes in version 0.0.19 - 2018-10-X UNRELEASED:
+-TODO:
 
 Changes in version 0.0.18.1 - 2018-09-11:
 * FIX: Make Tor Browser 8 work again and add more debug messages.
