@@ -33,6 +33,10 @@ import (
 // CheckUpdate queries the update server to see if an update for the current
 // bundle is available.
 func (c *Common) CheckUpdate(async *Async) *installer.UpdateEntry {
+	//Disable Updating until we work on the new .mar updates
+	return nil
+
+	
 	// Check for updates.
 	log.Printf("update: Checking for updates.")
 	async.UpdateProgress("Checking for updates.")

@@ -69,23 +69,7 @@ func RunTorBrowser(cfg *config.Config, manif *config.Manifest, tor *tor.Tor) (pr
 	h.stderr = logger
 	h.seccompFn = installTorBrowserSeccompProfile
 	h.fakeDbus = true
-	if manif.BundleVersionAtLeast("8.0a9") {
-		h.mountProc = true //FF 60ESR needs this for now
-	}
-	h.fakeProc = false //FF 60ESR doesnt need this
-
-	if manif.Channel == "alpha" && !manif.BundleVersionAtLeast("7.5a4") {
-		// SelfRando prior to c619441e1ceec3599bc81bf9bbaf4d17c68b54b7 has a
-		// bug in how it handles system call return values, leading to a
-		// infinite loop if `/proc/self/environ` doesn't exist.
-		//
-		// Despite the fix for this being available upstream, the browser
-		// people didn't pull it in for the 7.5a3 release.
-		//
-		// See: https://trac.torproject.org/projects/tor/ticket/22853
-		Debugf("sandbox: SelfRando /proc/self/environ workaround enabled")
-		h.file("/proc/self/environ", []byte{})
-	}
+	h.mountProc = true
 
 	// Gtk+ and PulseAudio.
 	hasAdwaita := h.appendGtk2Theme()
@@ -135,23 +119,16 @@ func RunTorBrowser(cfg *config.Config, manif *config.Manifest, tor *tor.Tor) (pr
 	desktopDir := filepath.Join(browserHome, "Desktop")
 	extensionsDir := filepath.Join(profileDir, "extensions")
 
-	prefFile := "preferences"
-	prefFileOptional := false
-	if manif.BundleVersionAtLeast("8.0a9") {
-		//FF60
-		prefFile = "prefs.js"
-		prefFileOptional = true
+	prefFile := "prefs.js"
+	//AVANIX added this, 60ESR needs this schemas...
+	//Enable Glib schemas to allow open, save etc...
+	//GENERAL for all
+	h.roBind("/usr/share/glib-2.0/schemas", "/usr/share/glib-2.0/schemas", false)
+	//TODO: Fine control
+	//h.roBind("/usr/share/glib-2.0/schemas/org.gtk.Settings.FileChooser.gschema.xml", "/usr/share/glib-2.0/schemas/org.gtk.Settings.FileChooser.gschema.xml", false)
 
-		//AVANIX added this, 60ESR needs this schemas...
-		//Enable Glib schemas to allow open, save etc...
-		//GENERAL for all
-		h.roBind("/usr/share/glib-2.0/schemas", "/usr/share/glib-2.0/schemas", false)
-		//TODO: Fine control
-		//h.roBind("/usr/share/glib-2.0/schemas/org.gtk.Settings.FileChooser.gschema.xml", "/usr/share/glib-2.0/schemas/org.gtk.Settings.FileChooser.gschema.xml", false)
-
-		//Allow this for some icons
-		h.roBind("/usr/share/icons/gnome", "/usr/share/icons/gnome", true)
-	}
+	//Allow this for some icons
+	h.roBind("/usr/share/icons/gnome", "/usr/share/icons/gnome", true)
 
 	// Filesystem stuff.
 	h.roBind(cfg.BundleInstallDir, filepath.Join(h.homeDir, "sandboxed-tor-browser", "tor-browser"), false)
@@ -165,7 +142,7 @@ func RunTorBrowser(cfg *config.Config, manif *config.Manifest, tor *tor.Tor) (pr
 	} else {
 		h.bind(realProfileDir, profileDir, false)
 	}
-	h.roBind(filepath.Join(realProfileDir, prefFile), filepath.Join(profileDir, prefFile), prefFileOptional)
+	h.roBind(filepath.Join(realProfileDir, prefFile), filepath.Join(profileDir, prefFile), true)
 	h.bind(realDesktopDir, desktopDir, false)
 	h.bind(realDownloadsDir, downloadsDir, false)
 	h.tmpfs(cachesDir)
@@ -243,10 +220,8 @@ func RunTorBrowser(cfg *config.Config, manif *config.Manifest, tor *tor.Tor) (pr
 
 	// Tor Browser currently is incompatible with PaX MPROTECT, apply the
 	// override if needed.
-	realFirefoxPath := filepath.Join(realBrowserHome, "firefox")
-	if manif.BundleVersionAtLeast("8.0a10") {
-		realFirefoxPath = filepath.Join(realBrowserHome, "firefox.real")
-	}
+	realFirefoxPath := filepath.Join(realBrowserHome, "firefox.real")
+
 	needsPaXPaths := []string{
 		realFirefoxPath,
 		filepath.Join(realBrowserHome, "plugin-container"),
@@ -331,10 +306,8 @@ func RunTorBrowser(cfg *config.Config, manif *config.Manifest, tor *tor.Tor) (pr
 	}
 	h.setenv("LD_LIBRARY_PATH", filepath.Join(browserHome, "TorBrowser", "Tor")+extraLdLibraryPath)
 
-	h.cmd = filepath.Join(browserHome, "firefox")
-	if manif.BundleVersionAtLeast("8.0a10") {
-		h.cmd = filepath.Join(browserHome, "firefox.real")
-	}
+	h.cmd = filepath.Join(browserHome, "firefox.real")
+
 	h.cmdArgs = []string{"--class", "Tor Browser", "-profile", profileDir}
 
 	// Do X11 last, because of the surrogate.

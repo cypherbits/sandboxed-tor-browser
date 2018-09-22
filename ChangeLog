@@ -1,5 +1,8 @@
 Changes in version 0.0.19 - 2018-10-X UNRELEASED:
--TODO:
+* Update new TB locales.
+* Review default bridges: they were updated already. (Looked in https://gitweb.torproject.org/builders/tor-browser-bundle.git/tree/Bundle-Data/PTConfigs/bridge_prefs.js)
+* Disable checking for updates until we fix .mar updates.
+* Remove support for pre-v8 versions.
 
 Changes in version 0.0.18.1 - 2018-09-11:
 * FIX: Make Tor Browser 8 work again and add more debug messages.
