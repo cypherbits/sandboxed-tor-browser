@@ -27,7 +27,7 @@ import (
 )
 
 const (
-	tbbSigningKeyID    = 0x4E2C6E8793298290
+	tbbSigningKeyID    = 0xEB774491D9FF06E2
 	tbbSigningKeyAsset = "installer/0x4E2C6E8793298290.asc"
 )
 
@@ -45,7 +45,7 @@ func ValidatePGPSignature(bundle, signature []byte) error {
 	return nil
 }
 
-func init() {
+func initDISABLED() {
 	var err error
 
 	pem, err := data.Asset(tbbSigningKeyAsset)

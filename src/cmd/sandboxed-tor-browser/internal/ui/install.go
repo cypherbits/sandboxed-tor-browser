@@ -111,22 +111,20 @@ func (c *Common) DoInstall(async *Async) {
 	log.Printf("install: Downloading %v", downloads.Sig)
 	async.UpdateProgress("Downloading Tor Browser PGP Signature.")
 
-	var bundleSig []byte
+	/*var bundleSig []byte
 	if bundleSig = async.Grab(client, downloads.Sig, nil); async.Err != nil {
 		return
-	}
+	}*/
 
 	// Check the signature.
-	log.Printf("install: Validating Tor Browser PGP Signature.")
-	async.UpdateProgress("Validating Tor Browser PGP Signature.")
+	/*log.Printf("install: Validating Tor Browser PGP Signature.")
+	async.UpdateProgress("Validating Tor Browser PGP Signature.")*/
 
+	log.Printf("install: PGP signature was disabled.")
 
-//AVANIX MODIFICAR: se ha comentado el PGP
-	 if async.Err = installer.ValidatePGPSignature(bundleTarXz, bundleSig); async.Err != nil {
-		 log.Printf("install: TODO: PGP check was disable to allow latest alpha to install.")
-	// 	return
-	 }
-
+	/*if async.Err = installer.ValidatePGPSignature(bundleTarXz, bundleSig); async.Err != nil {
+		 return
+	 }*/
 
 	// Install the bundle.
 	log.Printf("install: Installing Tor Browser.")
