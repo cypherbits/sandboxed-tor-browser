@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0d9c425b-e22b-4b92-943f-0265e4a4513e" name="Default Changelist" comment="">
+    <list default="true" id="0d9c425b-e22b-4b92-943f-0265e4a4513e" name="Default Changelist" comment="-Disable Tor and TorBrowser custom seccomp to make it work temporarily. We will enable it in the future.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/installer/0x4E2C6E8793298290.asc" beforeDir="false" afterPath="$PROJECT_DIR$/data/installer/0x4E2C6E8793298290.asc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/installer/hpkp.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/installer/hpkp.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cmd/sandboxed-tor-browser/internal/installer/pgp.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/cmd/sandboxed-tor-browser/internal/installer/pgp.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cmd/sandboxed-tor-browser/internal/ui/install.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/cmd/sandboxed-tor-browser/internal/ui/install.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ChangeLog" beforeDir="false" afterPath="$PROJECT_DIR$/ChangeLog" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/version" beforeDir="false" afterPath="$PROJECT_DIR$/data/version" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cmd/sandboxed-tor-browser/internal/sandbox/application.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/cmd/sandboxed-tor-browser/internal/sandbox/application.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cmd/sandboxed-tor-browser/internal/ui/launch.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/cmd/sandboxed-tor-browser/internal/ui/launch.go" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -15,31 +15,36 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/cmd/sandboxed-tor-browser/internal/ui/install.go">
+        <entry file="file://$PROJECT_DIR$/src/cmd/sandboxed-tor-browser/internal/ui/launch.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="414">
-              <caret line="122" column="54" selection-start-line="122" selection-start-column="54" selection-end-line="122" selection-end-column="54" />
+            <state relative-caret-position="226">
+              <caret line="67" column="6" selection-start-line="67" selection-start-column="4" selection-end-line="72" selection-end-column="7" />
               <folding>
-                <element signature="e#752#1113#0" expanded="true" />
+                <element signature="e#752#883#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/cmd/sandboxed-tor-browser/internal/installer/hpkp.go">
+        <entry file="file://$PROJECT_DIR$/src/cmd/sandboxed-tor-browser/internal/ui/update.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-270" />
+            <state relative-caret-position="151">
+              <caret line="183" column="25" selection-start-line="183" selection-start-column="17" selection-end-line="183" selection-end-column="25" />
+            </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/data/installer/hpkp.json">
+        <entry file="file://$PROJECT_DIR$/src/cmd/sandboxed-tor-browser/internal/sandbox/application.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="5" column="50" selection-start-line="5" selection-start-column="50" selection-end-line="5" selection-end-column="50" />
+            <state relative-caret-position="177">
+              <caret line="431" column="3" selection-start-line="431" selection-start-column="3" selection-end-line="431" selection-end-column="3" />
+              <folding>
+                <element signature="e#878#1276#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -50,14 +55,31 @@
     <findStrings>
       <find>libx</find>
       <find>libxu</find>
-      <find>appendLibraries</find>
       <find>GetLibraries</find>
       <find>getLibrar</find>
       <find>Resolv</find>
       <find>firefox</find>
       <find>i</find>
+      <find>ExtractBundle</find>
+      <find>launchTor</find>
+      <find>.so</find>
       <find>init</find>
+      <find>appendLibraries</find>
+      <find>distributionDependentLibSearchPath</find>
+      <find>libcrypto</find>
+      <find>install</find>
+      <find>installTorBrowserSeccompProfile</find>
+      <find>installTo</find>
+      <find>searchPa</find>
+      <find>RunUpdate</find>
+      <find>doUpdate</find>
     </findStrings>
+    <dirStrings>
+      <dir>$PROJECT_DIR$/src/cmd/sandboxed-tor-browser/internal</dir>
+      <dir>$PROJECT_DIR$/src</dir>
+      <dir>$PROJECT_DIR$</dir>
+      <dir>$PROJECT_DIR$/src/cmd/sandboxed-tor-browser</dir>
+    </dirStrings>
   </component>
   <component name="GOROOT" path="/usr/lib/go-1.10" />
   <component name="Git.Settings">
@@ -68,16 +90,17 @@
       <list>
         <option value="$PROJECT_DIR$/src/cmd/sandboxed-tor-browser/internal/dynlib/cache.go" />
         <option value="$PROJECT_DIR$/src/cmd/sandboxed-tor-browser/internal/dynlib/ldso.go" />
-        <option value="$PROJECT_DIR$/data/version" />
         <option value="$PROJECT_DIR$/README.md" />
-        <option value="$PROJECT_DIR$/src/cmd/sandboxed-tor-browser/internal/sandbox/application.go" />
         <option value="$PROJECT_DIR$/data/bridges.json" />
         <option value="$PROJECT_DIR$/data/ui/locales.json" />
-        <option value="$PROJECT_DIR$/ChangeLog" />
         <option value="$PROJECT_DIR$/data/installer/0x4E2C6E8793298290.asc" />
         <option value="$PROJECT_DIR$/src/cmd/sandboxed-tor-browser/internal/installer/pgp.go" />
         <option value="$PROJECT_DIR$/data/installer/hpkp.json" />
         <option value="$PROJECT_DIR$/src/cmd/sandboxed-tor-browser/internal/ui/install.go" />
+        <option value="$PROJECT_DIR$/data/version" />
+        <option value="$PROJECT_DIR$/ChangeLog" />
+        <option value="$PROJECT_DIR$/src/cmd/sandboxed-tor-browser/internal/sandbox/application.go" />
+        <option value="$PROJECT_DIR$/src/cmd/sandboxed-tor-browser/internal/ui/launch.go" />
       </list>
     </option>
   </component>
@@ -92,6 +115,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -109,6 +133,12 @@
               <item name="sandboxed-tor-browser" type="462c0819:PsiDirectoryNode" />
               <item name="data" type="462c0819:PsiDirectoryNode" />
               <item name="installer" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="sandboxed-tor-browser" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sandboxed-tor-browser" type="462c0819:PsiDirectoryNode" />
+              <item name="data" type="462c0819:PsiDirectoryNode" />
+              <item name="ui" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="sandboxed-tor-browser" type="b2602c69:ProjectViewProjectNode" />
@@ -189,6 +219,25 @@
               <item name="cmd" type="462c0819:PsiDirectoryNode" />
               <item name="sandboxed-tor-browser" type="462c0819:PsiDirectoryNode" />
               <item name="internal" type="462c0819:PsiDirectoryNode" />
+              <item name="sandbox" type="462c0819:PsiDirectoryNode" />
+              <item name="x11" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="sandboxed-tor-browser" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sandboxed-tor-browser" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="cmd" type="462c0819:PsiDirectoryNode" />
+              <item name="sandboxed-tor-browser" type="462c0819:PsiDirectoryNode" />
+              <item name="internal" type="462c0819:PsiDirectoryNode" />
+              <item name="tor" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="sandboxed-tor-browser" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sandboxed-tor-browser" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="cmd" type="462c0819:PsiDirectoryNode" />
+              <item name="sandboxed-tor-browser" type="462c0819:PsiDirectoryNode" />
+              <item name="internal" type="462c0819:PsiDirectoryNode" />
               <item name="ui" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -216,11 +265,19 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="tbb_stub" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="sandboxed-tor-browser" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+            </path>
+            <path>
+              <item name="sandboxed-tor-browser" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="Go SDK 1.10.4" type="20ee2d1f:SyntheticLibraryElementNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -230,6 +287,7 @@
     <property name="go.sdk.automatically.set" value="true" />
     <property name="go.vendoring.notification.had.been.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="go.sdk" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -247,10 +305,9 @@
     <frame x="57" y="27" width="1863" height="1053" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.26417172" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2058338" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" />
@@ -260,8 +317,9 @@
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="9" visible="true" weight="0.3293348" />
+      <window_info anchor="bottom" id="Terminal" order="9" visible="true" weight="0.32824427" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
+      <window_info anchor="bottom" id="Docker" order="11" show_stripe_button="false" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -275,7 +333,9 @@
     <MESSAGE value="Added more debug information in dynlib&#10;Make Tor Browser start again" />
     <MESSAGE value="release 0.18.1" />
     <MESSAGE value="update locales" />
-    <option name="LAST_COMMIT_MESSAGE" value="update locales" />
+    <MESSAGE value="-disable PGP verification.&#10;-update HKPK signatures to fix downloads." />
+    <MESSAGE value="-Disable Tor and TorBrowser custom seccomp to make it work temporarily. We will enable it in the future." />
+    <option name="LAST_COMMIT_MESSAGE" value="-Disable Tor and TorBrowser custom seccomp to make it work temporarily. We will enable it in the future." />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/cmd/sandboxed-tor-browser/internal/dynlib/hwcap.go">
@@ -293,47 +353,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/cmd/sandboxed-tor-browser/internal/dynlib/ldso.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="31" column="19" lean-forward="true" selection-start-line="31" selection-start-column="19" selection-end-line="31" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cmd/sandboxed-tor-browser/internal/dynlib/cache.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="95" column="9" lean-forward="true" selection-start-line="95" selection-start-column="9" selection-end-line="95" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/tbb_stub/tbb_stub.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="364">
-          <caret line="347" column="43" selection-start-line="347" selection-start-column="43" selection-end-line="347" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/cmd/sandboxed-tor-browser/internal/data/bindata.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-7398" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cmd/sandboxed-tor-browser/internal/sandbox/hugbox.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="277">
-          <caret line="301" column="18" selection-start-line="301" selection-start-column="11" selection-end-line="301" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cmd/sandboxed-tor-browser/internal/sandbox/seccomp.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-219" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cmd/sandboxed-tor-browser/internal/sandbox/process/process.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-993" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/cmd/sandboxed-tor-browser/internal/ui/config/manifest.go">
@@ -346,13 +368,6 @@
         <state relative-caret-position="-972" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/data/version">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="8" selection-start-column="8" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
@@ -363,16 +378,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/cmd/sandboxed-tor-browser/internal/sandbox/application.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="169">
-          <caret line="69" column="26" selection-start-line="69" selection-start-column="26" selection-end-line="69" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data/installer/mozilla.cfg">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/data/ui/channels.json">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -381,25 +386,8 @@
         <state relative-caret-position="-4590" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/data/installer/autoconfig.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/data/installer/release_primary.der">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data/installer/urls.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="12" column="4" lean-forward="true" selection-start-line="12" selection-start-column="4" selection-end-line="12" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data/ui/locales.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="26" column="12" lean-forward="true" selection-start-line="26" selection-start-column="12" selection-end-line="26" selection-end-column="12" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/data/bridges.json">
       <provider selected="true" editor-type-id="text-editor">
@@ -408,21 +396,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ChangeLog">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18">
-          <caret line="1" column="23" selection-start-line="1" selection-start-column="23" selection-end-line="1" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/data/torbrowser-amd64.seccomp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-2998" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cmd/sandboxed-tor-browser/internal/installer/metadata.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2104" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/data/installer/0x4E2C6E8793298290.asc">
@@ -436,27 +412,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="506">
           <caret line="51" column="9" lean-forward="true" selection-start-line="51" selection-start-column="9" selection-end-line="51" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cmd/sandboxed-tor-browser/internal/ui/ui.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="177">
-          <caret line="116" column="12" selection-start-line="116" selection-start-column="8" selection-end-line="116" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cmd/sandboxed-tor-browser/internal/ui/launch.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="46" column="26" selection-start-line="46" selection-start-column="26" selection-end-line="46" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cmd/sandboxed-tor-browser/internal/ui/update.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="223">
-          <caret line="14" column="40" selection-start-line="14" selection-start-column="40" selection-end-line="14" selection-end-column="40" />
         </state>
       </provider>
     </entry>
@@ -482,12 +437,164 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/cmd/sandboxed-tor-browser/internal/installer/metadata.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1802" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cmd/sandboxed-tor-browser/internal/installer/mar.go">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cmd/sandboxed-tor-browser/internal/installer/tar.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-650">
+          <caret line="42" column="50" selection-start-line="42" selection-start-column="50" selection-end-line="42" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/cmd/sandboxed-tor-browser/internal/ui/install.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="414">
-          <caret line="122" column="54" selection-start-line="122" selection-start-column="54" selection-end-line="122" selection-end-column="54" />
+        <state relative-caret-position="-574">
+          <caret line="109" column="30" lean-forward="true" selection-start-line="109" selection-start-column="30" selection-end-line="109" selection-end-column="30" />
           <folding>
             <element signature="e#752#1113#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cmd/sandboxed-tor-browser/internal/sandbox/process/process.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-992" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cmd/sandboxed-tor-browser/internal/dynlib/ldso.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-434">
+          <caret line="40" lean-forward="true" selection-start-line="40" selection-end-line="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cmd/sandboxed-tor-browser/internal/dynlib/cache.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="6552">
+          <caret line="374" column="40" selection-start-line="374" selection-start-column="40" selection-end-line="374" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/tor-amd64.seccomp">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cmd/sandboxed-tor-browser/internal/ui/ui.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5274">
+          <caret line="318" column="63" selection-start-line="318" selection-start-column="63" selection-end-line="318" selection-end-column="63" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/loaders.cache">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/revision">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tbb_stub/tbb_stub.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="338" lean-forward="true" selection-start-line="338" selection-end-line="338" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Makefile">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="17" selection-start-line="17" selection-end-line="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cmd/sandboxed-tor-browser/internal/sandbox/hugbox.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-756">
+          <caret line="282" column="13" selection-start-line="282" selection-start-column="13" selection-end-line="282" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/tor-common-amd64.seccomp">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cmd/sandboxed-tor-browser/internal/tor/tor.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-6534" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cmd/sandboxed-tor-browser/internal/tor/surrogate.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1404" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cmd/sandboxed-tor-browser/internal/sandbox/seccomp.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-519">
+          <caret line="43" column="5" selection-start-line="43" selection-start-column="5" selection-end-line="43" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/version">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="8" selection-start-column="8" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/installer/autoconfig.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/installer/mozilla.cfg">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/installer/urls.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="12" column="4" lean-forward="true" selection-start-line="12" selection-start-column="4" selection-end-line="12" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/ui/locales.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="468">
+          <caret line="26" column="12" lean-forward="true" selection-start-line="26" selection-start-column="12" selection-end-line="26" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ChangeLog">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="6" column="43" selection-start-line="6" selection-start-column="43" selection-end-line="6" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cmd/sandboxed-tor-browser/internal/sandbox/application.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="177">
+          <caret line="431" column="3" selection-start-line="431" selection-start-column="3" selection-end-line="431" selection-end-column="3" />
+          <folding>
+            <element signature="e#878#1276#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cmd/sandboxed-tor-browser/internal/ui/update.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="151">
+          <caret line="183" column="25" selection-start-line="183" selection-start-column="17" selection-end-line="183" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cmd/sandboxed-tor-browser/internal/ui/launch.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="226">
+          <caret line="67" column="6" selection-start-line="67" selection-start-column="4" selection-end-line="72" selection-end-column="7" />
+          <folding>
+            <element signature="e#752#883#0" expanded="true" />
           </folding>
         </state>
       </provider>

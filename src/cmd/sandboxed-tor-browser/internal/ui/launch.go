@@ -63,12 +63,14 @@ func (c *Common) DoLaunch(async *Async, checkUpdates bool) {
 	}
 
 	// If an update check is needed, check for updates.
-	if checkUpdates {
+	//TODO: reenable mar updates
+	log.Printf("launch: TB updates are disabled, enabled later.")
+	/*if checkUpdates {
 		c.doUpdate(async)
 		if async.Err != nil {
 			return
 		}
-	}
+	}*/
 
 	// Launch the sandboxed Tor Browser.
 	log.Printf("launch: Starting Tor Browser.")

@@ -915,7 +915,6 @@ func init() {
 		searchPaths = append([]string{
 			"/usr/lib64",                // Fedora 25
 			"/usr/lib/x86_64-linux-gnu", // Debian
-			"/lib/x86_64-linux-gnu",     // Debian
 		}, searchPaths...)
 	default:
 		panic("sandbox: unsupported architecture: " + runtime.GOARCH)
