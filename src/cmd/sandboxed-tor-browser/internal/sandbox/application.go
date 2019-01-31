@@ -575,7 +575,7 @@ func RunTor(cfg *config.Config, manif *config.Manifest, torrc []byte) (process *
 	h.stdout = logger
 	h.stderr = logger
 	//TODO: seccomp is wrong for Tor right now...
-	//h.seccompFn = func(fd *os.File) error { return installTorSeccompProfile(fd, cfg.Tor.UseBridges) }
+	h.seccompFn = func(fd *os.File) error { return installTorSeccompProfile(fd, cfg.Tor.UseBridges) }
 	h.unshare.net = false // Tor needs host network access.
 
 	// Regarding `/proc`...

@@ -1,12 +1,19 @@
-Changes in version 0.0.20 - 2019-02-X UNRELEASED:
+Changes in version 0.20.0 - 2019-02-X UNRELEASED:
+*Review and reenable mar updates.
+*Review and reenable Tor (not TB) seccomp.
+*Add new checkbox on advanced tab to enable TB seccomp for more security.
+*Move some "experimental features" to the advanced tab. Like download folder??
+*Investigate a way to add AppArmor profiles.
+*Investigate a way to set/unset capabilities.
 
 
-Changes in version 0.0.19 - 2019-01-31:
+Changes in version 0.19.0 - 2019-01-31:
 * Disable seccomp profiles to make this work again. It will be enable ASAP.
 * Update new TB locales.
 * Review default bridges: they were updated already. (Looked in https://gitweb.torproject.org/builders/tor-browser-bundle.git/tree/Bundle-Data/PTConfigs/bridge_prefs.js)
 * Disable checking for updates until we fix .mar updates.
 * Remove support for pre-v8 versions.
+* Update HKPK Tor HTTP keys.
 
 Changes in version 0.0.18.1 - 2018-09-11:
 * FIX: Make Tor Browser 8 work again and add more debug messages.

@@ -3,6 +3,7 @@
 # This is based off of tor's src/common/sandbox.c and is the whitelist for
 # calls that aren't affected by the presence of obfs4proxy.  gosecco's compiler
 # doesn't allow multiple rules for the same system call that aren't identical.
+#https://gitweb.torproject.org/tor.git/tree/src/lib/sandbox
 
 #
 # Extra constant definitions needed for filtering.
@@ -121,3 +122,4 @@ socket: argH1 == 0 && (arg0 == PF_INET && argL1 & MASKED_CLOEXEC_NONBLOCK == SOC
 getsockopt: arg1 == SOL_SOCKET && arg2 == SO_ERROR
 socketpair: arg0 == PF_LOCAL && (arg1 == SOCK_STREAM || arg1 == SOCK_STREAM | SOCK_CLOEXEC)
 fcntl: arg1 == F_GETFL || (arg1 == F_SETFL && (arg2 == O_RDWR|O_NONBLOCK || arg2 == O_RDONLY |O_NONBLOCK)) || arg1 == F_GETFD || (arg1 == F_SETFD && arg2 == FD_CLOEXEC)
+
