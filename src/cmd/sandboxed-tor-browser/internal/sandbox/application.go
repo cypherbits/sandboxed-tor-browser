@@ -67,7 +67,8 @@ func RunTorBrowser(cfg *config.Config, manif *config.Manifest, tor *tor.Tor) (pr
 	logger := newConsoleLogger("firefox")
 	h.stdout = logger
 	h.stderr = logger
-	h.seccompFn = installTorBrowserSeccompProfile
+	//TODO: change and enable seccomp again
+	//h.seccompFn = installTorBrowserSeccompProfile
 	h.fakeDbus = true
 	h.mountProc = true
 
@@ -573,7 +574,8 @@ func RunTor(cfg *config.Config, manif *config.Manifest, torrc []byte) (process *
 	logger := newConsoleLogger("tor")
 	h.stdout = logger
 	h.stderr = logger
-	h.seccompFn = func(fd *os.File) error { return installTorSeccompProfile(fd, cfg.Tor.UseBridges) }
+	//TODO: seccomp is wrong for Tor right now...
+	//h.seccompFn = func(fd *os.File) error { return installTorSeccompProfile(fd, cfg.Tor.UseBridges) }
 	h.unshare.net = false // Tor needs host network access.
 
 	// Regarding `/proc`...
@@ -913,6 +915,7 @@ func init() {
 		searchPaths = append([]string{
 			"/usr/lib64",                // Fedora 25
 			"/usr/lib/x86_64-linux-gnu", // Debian
+			"/lib/x86_64-linux-gnu",     // Debian
 		}, searchPaths...)
 	default:
 		panic("sandbox: unsupported architecture: " + runtime.GOARCH)
