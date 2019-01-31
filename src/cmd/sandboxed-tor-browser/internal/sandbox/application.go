@@ -68,7 +68,7 @@ func RunTorBrowser(cfg *config.Config, manif *config.Manifest, tor *tor.Tor) (pr
 	h.stdout = logger
 	h.stderr = logger
 	//TODO: change and enable seccomp again
-	//h.seccompFn = installTorBrowserSeccompProfile
+	h.seccompFn = installTorBrowserSeccompProfile
 	h.fakeDbus = true
 	h.mountProc = true
 
