@@ -191,14 +191,10 @@ wait4: 1
 # calls.
 #
 
-#futex: arg1 == FUTEX_CMP_REQUEUE_PRIVATE || arg1 == FUTEX_WAIT || arg1 == FUTEX_WAIT_BITSET_PRIVATE|FUTEX_CLOCK_REALTIME || arg1 == FUTEX_WAIT_PRIVATE || arg1 == FUTEX_WAKE || arg1 == FUTEX_WAKE_OP_PRIVATE || arg1 == FUTEX_WAKE_PRIVATE || arg1 == FUTEX_WAIT_BITSET_PRIVATE
-futex: 1
-#madvise: arg2 == MADV_NORMAL || arg2 == MADV_DONTNEED || arg2 == MADV_FREE
-madvise: 1
-#ioctl: arg1 == FIONREAD || arg1 == TCGETS || arg1 == TIOCGPGRP
-ioctl: 1
-#prctl: arg0 == PR_SET_NAME || arg0 == PR_GET_NAME || arg0 == PR_GET_TIMERSLACK || arg0 == PR_SET_SECCOMP || arg0 == PR_SET_NO_NEW_PRIVS
-prctl: 1
+futex: arg1 == FUTEX_CMP_REQUEUE_PRIVATE || arg1 == FUTEX_WAIT || arg1 == FUTEX_WAIT_BITSET_PRIVATE|FUTEX_CLOCK_REALTIME || arg1 == FUTEX_WAIT_PRIVATE || arg1 == FUTEX_WAKE || arg1 == FUTEX_WAKE_OP_PRIVATE || arg1 == FUTEX_WAKE_PRIVATE || arg1 == FUTEX_WAIT_BITSET_PRIVATE
+madvise: arg2 == MADV_NORMAL || arg2 == MADV_DONTNEED || arg2 == MADV_FREE
+ioctl: arg1 == FIONREAD || arg1 == TCGETS || arg1 == TIOCGPGRP
+prctl: arg0 == PR_SET_NAME || arg0 == PR_GET_NAME || arg0 == PR_GET_TIMERSLACK || arg0 == PR_SET_SECCOMP || arg0 == PR_SET_NO_NEW_PRIVS
 socket: arg0 == AF_UNIX
 
 # Calls that other people think we should have but we deny:
@@ -211,32 +207,3 @@ socket: arg0 == AF_UNIX
 #  * memfd_create
 #  * personality
 #  * mlock
-
-
-#Firefox Quantum for TB 8
-tkill: 1
-faccessat: 1
-flock: 1
-pselect6: 1
-set_thread_area: 1
-times: 1
-msync: 1
-munlock: 1
-get_mempolicy: 1
-setitimer: 1
-
-#more
-vfork: 1
-memfd_create: 1
-personality: 1
-mlock: 1
-quotactl: 1
-time: 1
-epoll_pwait: 1
-epoll_ctl: 1
-readv: 1
-access: 1
-sendmmsg: 1
-semget: 1
-semctl: 1
-semop: 1

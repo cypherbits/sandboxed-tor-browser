@@ -1,10 +1,12 @@
-Changes in version 0.20.0 - 2019-02-X UNRELEASED:
+TODO next release:
 *Review and reenable mar updates.
-*Review and reenable Tor (not TB) seccomp.
 *Add new checkbox on advanced tab to enable TB seccomp for more security.
 *Move some "experimental features" to the advanced tab. Like download folder??
 *Investigate a way to add AppArmor profiles.
 *Investigate a way to set/unset capabilities.
+
+Changes in version 0.20.0 - 2019-02-X UNRELEASED:
+* Review and reenable Tor (not TB) seccomp.
 
 
 Changes in version 0.19.0 - 2019-01-31:
